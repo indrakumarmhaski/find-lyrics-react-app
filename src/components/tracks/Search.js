@@ -18,6 +18,15 @@ class Search extends Component {
                                 <i className="fas fa-music"></i> Search For A Song
                             </h1>
                             <p className="lead text-center">Get the lyrics for any song</p>
+                            <form>
+                                <div className="form-group">
+                                    <input className="form-control-lg form-control"
+                                     type="text"
+                                     placeholder="Song title.."
+                                     name="trackTitle"
+                                     value={ this.state.trackTitle }></input>
+                                </div>
+                            </form>
                         </div>
                     )
                 } }
