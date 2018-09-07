@@ -3,11 +3,28 @@ import axios from 'axios';
 
 const Context = React.createContext();
 
+const reducer = (state, action) => {
+    switch(action.type){
+        case 'SEARCH_TRACKS':
+            return {
+                ...state,
+                track_list: action.payload,
+                heading: 'Search Results'
+            };
+        default:
+            return state;
+    }
+} 
+
 export class Provider extends Component {
 
     state = {
         track_list: [],
-        heading: 'Top 10 Tracks'
+        heading: 'Top 10 Tracks',
+        dispatch: action => this.setState(state => reducer(state, action))
+        // this is going to allows us to have a resucer where we can call dispatch from any consumer component to 
+        // manupulate the state and do what we want in our case we want to replace the ten tracs with wahat we get
+        // after the search
     }
 
     componentDidMount(){

@@ -13,13 +13,19 @@ class Search extends Component {
         this.setState({ trackTitle: e.target.value });
     }
 
-    findTrack = (e) => {
+    findTrack = (dispatch, e) => {
         e.preventDefault();
+
         let trackTitle = this.state.trackTitle;
         axios.get("https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_track="+trackTitle+"&page_size=10&page=1&s_track_rating=desc&apikey=840acaf663949542bcc2474837f477fc") 
         .then( res =>{ 
-            console.log(res.data);
+            // console.log(res.data);
             // this.setState({track_list: res.data.message.body.track_list})
+            dispatch({
+                type: 'SEARCH_TRACKS',
+                payload: res.data.message.body.track_list
+            });
+            this.setState({ trackTitle: '' })
         } )
         .catch(err => console.log(err))
     }
@@ -28,13 +34,14 @@ class Search extends Component {
         return (
             <Consumer>
                 { value =>{
+                    const { dispatch } = value;
                     return(
                         <div className="card card-body mb-4 mb-4">
                             <h1 className="display-4 text-center">
                                 <i className="fas fa-music"></i> Search For A Song
                             </h1>
                             <p className="lead text-center">Get the lyrics for any song</p>
-                            <form onSubmit={this.findTrack}>
+                            <form onSubmit={this.findTrack.bind(this, dispatch)}>
                                 <div className="form-group">
                                     <input className="form-control-lg form-control"
                                      type="text"

@@ -49,9 +49,9 @@ class Lyrics extends Component {
                         <li className="list-group-item">
                             <strong>Album Id</strong>: {track.album_id}
                         </li>
-                        <li className="list-group-item">
+                        {/* <li className="list-group-item">
                             <strong>Song Genre:</strong>: {track.primary_genres.music_genre_list[0].music_genre.music_genre_name}
-                        </li>
+                        </li> */}
                         <li className="list-group-item">
                             <strong>Relese Date</strong> <Moment format="MM/DD/YYYY">{track.first_release_date}</Moment>
                         </li>
